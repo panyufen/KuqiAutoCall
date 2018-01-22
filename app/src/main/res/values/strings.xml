@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AutoCall</string>
+    <string name="version_str">当前版本：V%s</string>
+</resources>
