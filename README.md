@@ -1,6 +1,9 @@
 # KuqiAutoCall
 ## 自动重拨 专用于 退酷骑押金
 
+#### 下载地址
+[Android_酷骑自动重播](https://github.com/panyufen/panyufen.github.io/raw/master/kuqi/Android_AutoCall.apk)
+
 #### 退款需要满足的条件：
 - 1.微信支付的押金
 - 2.当前手机号为酷骑账号
