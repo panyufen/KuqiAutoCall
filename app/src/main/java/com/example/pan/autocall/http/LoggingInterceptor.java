@@ -8,7 +8,6 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import okhttp3.internal.Util;
 import okio.Buffer;
 import okio.BufferedSource;
 
@@ -50,10 +49,10 @@ public class LoggingInterceptor implements Interceptor {
         source.request(Long.MAX_VALUE); // Buffer the entire body.
         Buffer buffer = source.buffer();
 
-        Charset charset = Util.bomAwareCharset(buffer, response.body().contentType().charset());
-
+//        Charset charset = Util.bomAwareCharset(buffer, response.body().contentType().charset());
+//
         if (contentLen != 0) {
-            result = buffer.clone().readString(charset);
+            result = buffer.clone().readString(Charset.forName("utf-8"));
             result = decodeUnicode(result);
         }
 

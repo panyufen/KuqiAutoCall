@@ -17,7 +17,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -27,7 +26,6 @@ import android.widget.Toast;
 
 import com.suke.widget.SwitchButton;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
 
 import java.util.List;
 import java.util.Random;
@@ -84,21 +82,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
-        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-
-        sharedPreference = getSharedPreferences("SHARE_TAG", Context.MODE_PRIVATE);
-        int userId = new Random().nextInt(65535);
-        int shareid = sharedPreference.getInt(usrid, 0);
-        if (shareid == 0) {
-            sharedPreference.edit().putInt(usrid, userId).apply();
-        } else {
-            userId = shareid;
-        }
-        Log.i("userid ", String.valueOf(userId));
-
-        MobclickAgent.onProfileSignIn(String.valueOf(userId));
         PermissionGen.needPermission(this, 100, new String[]{Manifest.permission.CALL_PHONE});
+        sharedPreference = getSharedPreferences("SHARE_TAG", Context.MODE_PRIVATE);
+
 
         handler = new Handler(new Handler.Callback() {
             @Override
@@ -128,6 +114,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        initView();
+        initTelePhoneListener();
+    }
+
+    private void initView() {
         String text = downloadTv.getText().toString();
         SpannableStringBuilder builder = new SpannableStringBuilder(text);
         int starti = text.indexOf(clickText);
@@ -161,6 +152,10 @@ public class MainActivity extends AppCompatActivity {
                 stopBtn.setEnabled(isChecked);
             }
         });
+    }
+
+    private void initTelePhoneListener() {
+//        TelephoneProcessor telephoneProcessor = new TelephoneProcessor(this);
     }
 
 
